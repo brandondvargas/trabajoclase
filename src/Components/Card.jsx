@@ -9,8 +9,8 @@ function Card(props) {
   return (
     <div className="card">
       <div className="top">
-        <h2 className="name">{props.namecontact}</h2>
-        <Avatar image={props.image} />
+        <h2 className="nombre">{props.nombre}</h2>
+        <Avatar image={props.foto} />
       </div>
       <Details tel={props.tel} email={props.email} />
       <Fab onClick={props.deleteCard}>

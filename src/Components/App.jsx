@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "./List";
 import Counter from "./Counter";
 import Card from "./Card";
@@ -29,8 +29,8 @@ function App() {
         return (
             <Card 
                 key={contact.id}
-                namecontact={contact.namecontact} 
-                image={contact.image} 
+                nombre={contact.nombre} 
+                foto={contact.foto} 
                 tel={contact.tel} 
                 email={contact.email} 
                 deleteCard={deleteCardApp}
@@ -68,10 +68,15 @@ function App() {
         ]);
     }
 
-    const isLogged = true;
+    // Este es el boton para esconder todo
+    var [isLogged, setMiVariableBooleana]  = useState (true);
+    var hide = () => {
+        setMiVariableBooleana(!isLogged);
 
+    };
     return (
         <div>
+            <button onClick={hide}>hide</button>
             <FormTarjetas 
                 nameHandler={nameHandlerApp}
                 telHandler={telHandlerApp}

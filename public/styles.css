@@ -22,8 +22,8 @@ body {
 .card {
   border-radius: 25px;
   position: relative;
-  padding: 25px 15px;
-  background-color: #ffa4a4;
+  padding: 0px 15px;
+  background-color: rgb(207, 144, 27);
   margin: 50px 0;
   height: 200px;
   box-shadow: 0 2px 5px #ccc;
@@ -34,7 +34,7 @@ body {
   border-radius: 25px 25px 0 0;
   height: 100px;
   width: 100%;
-  background-color: #e74c4c;
+  background-color: #e7d04c;
   position: absolute;
   top: 0;
   left: 0;
@@ -46,11 +46,11 @@ body {
   color: #2d3436;
   display: flex;
   flex: 1;
-  margin: 10% 20px 0;
+  margin: 5% 20px 0;
 }
 
 .card img {
-  margin: 30px 20px 0 0;
+  margin: 15px 20px 0 0;
 }
 
 .circle-img {
@@ -61,10 +61,10 @@ body {
 }
 
 .bottom {
-  margin-top: 120px;
+  margin-top: 110px;
 }
 
 .info {
-  margin: 20px 0;
-  color: #7e1a1a;
+  margin: 5px 0;
+  color: #dde7e7;
 }

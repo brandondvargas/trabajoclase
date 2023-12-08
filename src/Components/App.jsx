@@ -1,156 +1,79 @@
 import React, { useState } from "react";
 import List from "./List";
-import Counter from "./Counter";
 import Card from "./Card";
-import contacts from "./Contacts"
 import FormTarjetas from "./FormTarjetas";
+import Menu from "./Menu";
 
 function App() {
-    const [contactList, setContactList] = React.useState(contacts);
-    const [newName, setNewName] = React.useState("");
-    const [newTel, setNewTel] = React.useState("6148877441");
-    const [newMail, setNewMail] = React.useState("algo@mail.com");
+    // Arreglo de objetos con los datos de los platillos
+    const [platillos] = React.useState(Menu);
 
-
-    function createCard(contact) {
-        // borrar = tomar lista de contacto y eliminarla
-        //Se crea la funcion deleteCardApp dentro de createCard para que se cree la función que funcione para 
-        //cada tarjeta en especifico
-    function deleteCardApp (){
-        setContactList((prevValue) => {
-                //la siguiente funcion crea un arreglo con todas las tarjetas menos la que tenga el id de la que vamos a borrar.
-            return prevValue.filter((item, index) => {
-                return item.id !== contact.id;
-            })
-        })
-        
-    }
-
+    //Funcion para crear Tarjetas
+    function createCard(platillo) {
         return (
             <Card 
-                key={contact.id}
-                nombre={contact.nombre} 
-                foto={contact.foto} 
-                tel={contact.tel} 
-                email={contact.email} 
-                deleteCard={deleteCardApp}
+                key={platillo.id}
+                nombre={platillo.nombre} 
+                image={platillo.image} 
+                costo={platillo.costo} 
+                descr={platillo.descr} 
             />
         );
     }
 
-    function nameHandlerApp(event) {
-        setNewName(event.target.value);
-        console.log(newName);
+    //Funcion para crear Listas (PRUEBA, no es necesario)
+    function createLists(){
+      return (
+            <List 
+            book1="El señor de los anillos"
+            book2="Harry Potter"
+            book3="El alquimista"/>
+      );
     }
+     
+    // Variable de control de estado para la interfaz
+    const [ui, setUI] = useState(0);
 
-    function telHandlerApp(event) {
-        setNewTel(event.target.value);
-        console.log(newTel);
-    }
-
-    function mailHandlerApp(event) {
-        setNewMail(event.target.value);
-        console.log(newMail);
-    }
-
-    function addContactApp() {
-        let idArray = contactList.map(contact => contact.id);
-        let idTemp = 1;
-        let flagOccupied = true;
-        while (flagOccupied){
-            idTemp++;
-            flagOccupied = idArray.indexOf(idTemp) != -1;
-            console.log(flagOccupied);
+    // Funcion para cambiar las Interfases con aumentos
+    function next(){
+        let uiTemp = ui+1;  //Interfaz temporal con aumento de click
+        if (uiTemp >= 3) {  //Reinicia al dar la vuelta
+            uiTemp = 0;
         } 
-        setContactList((prevValue) => [
-            ...prevValue,
-            {id: idTemp, namecontact: newName, image: "", tel: newTel, email: newMail}
-        ]);
+        setUI(uiTemp);      //Funcion para actualizar el estado
     }
 
-    // Este es el boton para esconder todo
-    var [isLogged, setMiVariableBooleana]  = useState (true);
-    var hide = () => {
-        setMiVariableBooleana(!isLogged);
+    // Funcion para mostrar Tarjetas (Menu Platillos), utiliza el valor 0
+    function showCards(){
+        setUI(0);
+    }
 
-    };
+    // Funcion para imprimir listas (PRUEBA, no es necesario), utiliza el valor 1
+    function showLists(){
+        setUI(1);
+    }
+
+    // Funcion para imprimir Hello, PRUEBA, utliza el valor 2
+    function showReservation(){
+        setUI(2);
+    }
+
     return (
-        <div>
-            <button onClick={hide}>hide</button>
-            <FormTarjetas 
-                nameHandler={nameHandlerApp}
-                telHandler={telHandlerApp}
-                mailHandler={mailHandlerApp}
-                addContact={addContactApp}
-                />
-            {isLogged && contactList.map(createCard)}
-            <Counter />
-            <h1>Cualquier cosa</h1>
-            <List 
-                book1="El señor de los anillos"
-                book2="Harry Potter"
-                book3="El alquimista"/>
-            <List 
-                book1="El psicoanalista"
-                book2="El retrato de Dorian Gray"
-                book3="El perfume"/>
+       
+    <div>
+       <div class="container">
+         <div class="row">
+           <div class="col-xl"><button onClick={showCards}>Menu</button></div>
+           <div class="col-xl"><button onClick={showLists}>Interfaz 2</button></div>  
+           <div class="col-xl"><button onClick={showReservation}>Interfaz 3</button></div>  
+           <div class="col-xl"><button onClick={next}>Next</button></div> 
+        </div>
+    </div>  
+            
+        {ui === 0 ? platillos.map(createCard) : ui === 1 ? platillos.map(createLists) : <h1>Hello</h1> }
+
         </div>
     );
 }
 
 export default App;
-
-
-
-/*
-function App() {
-
-    function createCard(contact) {
-        return (
-            <Card 
-                namecontact={contact.namecontact} 
-                image={contact.image} 
-                tel={contact.tel} 
-                email={contact.email} 
-            />
-        );
-    }
-
-    return (
-        <div>
-            <Card 
-                namecontact={contacts[0].namecontact} 
-                image={contacts[0].image} 
-                tel={contacts[0].tel} 
-                email={contacts[0].email} 
-            />
-            <Card 
-                namecontact={contacts[1].namecontact} 
-                image={contacts[1].image} 
-                tel={contacts[1].tel} 
-                email={contacts[1].email} 
-            />
-            <Card 
-                namecontact={contacts[2].namecontact} 
-                image={contacts[2].image} 
-                tel={contacts[2].tel} 
-                email={contacts[2].email} 
-            />
-            <Counter />
-            <h1>Cualquier cosa</h1>
-            <List 
-                book1="El señor de los anillos"
-                book2="Harry Potter"
-                book3="El alquimista"/>
-            <List 
-                book1="El psicoanalista"
-                book2="El retrato de Dorian Gray"
-                book3="El perfume"/>
-        </div>
-    );
-}
-
-export default App;
-
-
-*/
